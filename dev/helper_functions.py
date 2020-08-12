@@ -7,7 +7,7 @@ def frame_extractor():
     os.mkdir('../data/Images')
 
     filename = '../data/train.mp4'
-    #Get video file
+    #Get video object
     captured_video = cv2.VideoCapture(filename)
     # get the first frame from the video file. Each time the command below
     # is run, a subsequent image is read.
