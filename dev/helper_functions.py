@@ -1,6 +1,7 @@
 import cv2
 import os
-
+import numpy as np
+import pandas as pd
 
 def frame_extractor():
     #Create Image Folder
@@ -62,5 +63,54 @@ def file_renamer():
     # Change the current python directory to where this script file is
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
+
+def image_ndim_reshaper():
+    # find the directory where the files are located using the relative location of the current script
+    directory = '../data/Local Data/Images'
+
+    # Change the current python directory to where the files are located
+    os.chdir(directory)
+
+    # Get absolute path to the files
+    directory = os.getcwd()
+
+    # Get all the filenames
+    filenames = os.listdir(directory)
+
+    # sorted(mylist, key=WhatToSortBy)
+    # https://stackoverflow.com/questions/8966538/syntax-behind-sortedkey-lambda
+    filenames.sort(key=lambda x: os.path.getmtime(os.path.join(directory, x)))
+    array_col_size = cv2.imread(filenames[0])
+    array_col_size = array_col_size.shape[0] * array_col_size.shape[1] * array_col_size.shape[2]
+    training_set = np.empty((len(filenames)-1, array_col_size), dtype='uint8')
+    fps = 20
+
+
+    for i in range(len(filenames)-1):
+        A = cv2.imread(filenames[i])
+        A = np.ravel(A)
+        B = cv2.imread(filenames[i+1])
+        B = np.ravel(B)
+        C = A - B
+        training_set[i] = C
+        if not bool(i % (fps * 60)):
+            print(f'{i //(fps * 60)} minute(s) of video processed')
+
+    training_set = training_set.T
+    np.savetxt('../Frame_Differences.csv', training_set, delimiter=',', fmt='%u')
+    # pd.DataFrame(training_set.T).to_csv('../Frame_Differences_0-2.csv', header=False, index=False)
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+def speed_difference():
+    path = '../data/train.txt'
+    data = np.loadtxt(path)
+    data = np.diff(data)
+    np.savetxt('../data/Speed_Differences.txt', data, fmt='%f')
+
 if __name__ == '__main__':
-    # leave this empty before closing the project
+    filename1 = '../data/Local Data/Images/frame_0_0_1_28.105569.jpg'
+    filename2 = '../data/Local Data/Images/frame_0_2_15_27.266277.jpg'
+    A = cv2.imread(filename1)
+    B = cv2.imread(filename2)
+    C = A + B
+    cv2.imwrite('../data/Local Data/test2.jpg', C)

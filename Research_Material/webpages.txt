@@ -1,0 +1,8 @@
+1) Introduction to Motion Estimation with Optical Flow
+https://nanonets.com/blog/optical-flow/
+
+2) Predicting vehicle speed from dash cam video
+https://medium.com/weightsandbiases/predicting-vehicle-speed-from-dashcam-video-f6158054f6fd
+
+3) What is Optical Flow and why does it matter in deep learning _ by Mark Gituma _ The Startup _ Medium
+https://medium.com/swlh/what-is-optical-flow-and-why-does-it-matter-in-deep-learning-b3278bb205b5
