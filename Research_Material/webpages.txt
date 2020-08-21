@@ -9,3 +9,6 @@ https://medium.com/swlh/what-is-optical-flow-and-why-does-it-matter-in-deep-lear
 
 4) Training on Large Datasets That Don’t Fit In Memory in Keras
 https://medium.com/@mrgarg.rajat/training-on-large-datasets-that-dont-fit-in-memory-in-keras-60a974785d71
+
+5) A detailed example of how to use data generators with Keras
+https://machinelearningmastery.com/how-to-load-large-datasets-from-directories-for-deep-learning-with-keras/
