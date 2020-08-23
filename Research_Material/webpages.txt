@@ -10,5 +10,8 @@ https://medium.com/swlh/what-is-optical-flow-and-why-does-it-matter-in-deep-lear
 4) Training on Large Datasets That Don’t Fit In Memory in Keras
 https://medium.com/@mrgarg.rajat/training-on-large-datasets-that-dont-fit-in-memory-in-keras-60a974785d71
 
-5)
+5) Data Generation
 https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly
+
+6) Understanding Optical Flow
+https://www.youtube.com/watch?v=5VyLAH8BhF8
