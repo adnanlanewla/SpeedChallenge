@@ -1,6 +1,7 @@
 import cv2
 import os
 import numpy as np
+from tempfile import TemporaryFile
 import pandas as pd
 
 def frame_extractor():
@@ -84,8 +85,6 @@ def image_ndim_reshaper():
     array_col_size = array_col_size.shape[0] * array_col_size.shape[1] * array_col_size.shape[2]
     training_set = np.empty((len(filenames)-1, array_col_size), dtype='uint8')
     fps = 20
-
-
     for i in range(len(filenames)-1):
         A = cv2.imread(filenames[i])
         A = np.ravel(A)
@@ -101,16 +100,44 @@ def image_ndim_reshaper():
     # pd.DataFrame(training_set.T).to_csv('../Frame_Differences_0-2.csv', header=False, index=False)
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
+def save_images_as_np_array(image_directory, array_filename):
+    # Change the current python directory to where the files are located
+    os.chdir(image_directory)
+    # Get absolute path to the files
+    image_directory = os.getcwd()
+    # Get all the filenames
+    filenames = os.listdir(image_directory)
+    filenames.sort(key=lambda x: os.path.getmtime(os.path.join(image_directory, x)))
+    array_col_size = cv2.imread(filenames[0])
+    fps = 20
+    # Append the numpy array to a list in a loop
+    all_images = []
+    for i in range(len(filenames)-1):
+        A = cv2.imread(filenames[i])
+        all_images.append(A)
+        A = np.ravel(A)
+        if not bool(i % (fps * 60)):
+            print(f'{i //(fps * 60)} minute(s) of video processed')
+
+    array_of_images = np.array(all_images, dtype=np.uint8)
+    np.savez(array_filename, array_of_images)
+
+def load_numpy_array(array_filename):
+    container = np.load(array_filename)
+    data = [container[key] for key in container]
+    array_of_images = data[0]
+    return array_of_images
+
 def speed_difference():
     path = '../data/train.txt'
     data = np.loadtxt(path)
     data = np.diff(data)
     np.savetxt('../data/Speed_Differences.txt', data, fmt='%f')
 
-if __name__ == '__main__':
-    filename1 = '../data/Local Data/Images/frame_0_0_1_28.105569.jpg'
-    filename2 = '../data/Local Data/Images/frame_0_2_15_27.266277.jpg'
-    A = cv2.imread(filename1)
-    B = cv2.imread(filename2)
-    C = A + B
-    cv2.imwrite('../data/Local Data/test2.jpg', C)
+#if __name__ == '__main__':
+    # filename1 = '../data/Local Data/Images/frame_0_0_1_28.105569.jpg'
+    # filename2 = '../data/Local Data/Images/frame_0_2_15_27.266277.jpg'
+    # A = cv2.imread(filename1)
+    # B = cv2.imread(filename2)
+    # C = A + B
+    # cv2.imwrite('../data/Local Data/test2.jpg', C)
