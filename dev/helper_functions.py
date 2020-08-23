@@ -1,8 +1,7 @@
 import cv2
 import os
 import numpy as np
-from tempfile import TemporaryFile
-import pandas as pd
+
 
 def frame_extractor():
     #Create Image Folder
