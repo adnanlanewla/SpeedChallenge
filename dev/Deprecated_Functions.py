@@ -1,4 +1,5 @@
 import os
+import numpy as np
 
 def file_renamer():
     # find the directory where the files are located using the relative location of the current script
@@ -23,4 +24,36 @@ def file_renamer():
 
     f.close()
     # Change the current python directory to where this script file is
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+def image_to_RGB(start_image_number = 1, num_of_images_per_file = 3600):
+    # find the directory where the files are located using the relative location of the current script
+    directory = '../data/Local_Data/Cropped_Images'
+    # Change the current python directory to where the files are located
+    os.chdir(directory)
+    # Get absolute path to the files
+    directory = os.getcwd()
+    # Get all the filenames
+    filenames = os.listdir(directory)
+    # sort the array based on the files' creation date
+    filenames.sort(key=lambda x: os.path.getmtime(os.path.join(directory, x)))
+    # read one file to extract its height, width and channels using the shape attribute
+    array_col_size = cv2.imread(filenames[0])
+    #examples is variable used to determine the number of images to be stored in one file. Its
+    #provided as a function argument
+    examples = num_of_images_per_file
+    #initialize numpy array which will contain rgb data for one output file. One
+    #output file contains data for a number of images specified by the 'examples' variable above
+    training_set = np.empty((examples, array_col_size.shape[0], array_col_size.shape[1], array_col_size.shape[2]), dtype=np.uint8)
+    # frame per second variable for housekeeping purposes in the for-loop below
+    fps = 20
+    #Loop end calculator
+    loop_end = min(start_image_number + examples - 1, len(filenames))
+
+    for i in range(start_image_number-1, loop_end):
+        training_set[i] = cv2.imread(filenames[i])
+        if not bool(i % (fps * 60)):
+            print(f'{i //(fps * 60)} minute(s) of video processed')
+
+    np.savez_compressed(f'../../Image_RGB_Values_{start_image_number}_{loop_end}', a = training_set)
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
