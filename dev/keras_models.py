@@ -1,4 +1,3 @@
-import numpy as np
 import tensorflow as tf
 
 def VGG_model(image_w, image_h, l1=0, l2=0):

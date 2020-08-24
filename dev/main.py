@@ -1,5 +1,8 @@
 from keras_models import *
 from helper_functions import *
+from image_preprocessing import *
+import generator
+
 
 
 if __name__ == '__main__':
@@ -14,16 +17,14 @@ if __name__ == '__main__':
     # {20400,480,640,3}
 
     extract_frames = False
-    save_images_as_numpy_array = True
+    generate_pipeline = True
     image_directory = '../data/Images'
-    array_file = '../../data/np_array_of_images.npz'
     if extract_frames:
+        # renaming of files is done during extraction of frames
         frame_extractor()
-        # renaming of files is done after frames are extracted
-        file_renamer()
-    if save_images_as_numpy_array:
-        save_images_as_np_array(image_directory=image_directory, array_filename=array_file)
-        array_of_images = load_numpy_array(array_filename=array_file)
 
+    # this will generate the pipeline, we can use for training the keras model
+    if generate_pipeline:
+        my_training_batch_generator, my_validation_batch_generator = generator.My_Custom_Generator(image_directory)
 
     print('Done')
