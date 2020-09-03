@@ -60,7 +60,6 @@ def image_cropper():
 
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-
 def speed_difference():
     path = '../data/train.txt'
     data = np.loadtxt(path)
