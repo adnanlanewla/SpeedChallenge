@@ -21,3 +21,6 @@ https://medium.com/@chengyao.shen/decoding-comma-ai-openpilot-the-driving-model-
 
 8) FlowNet Original Implemenation
 https://lmb.informatik.uni-freiburg.de/resources/software.php
+
+9) FlowNet 1.0 implementation in Pytorch
+https://github.com/ClementPinard/FlowNetPytorch
