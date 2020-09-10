@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72699fd6-e0c7-4fe6-aa72-3a7a4f583953" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/models/FlowNet_S.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/models/submodules.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SpeedChallenge.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SpeedChallenge.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/keras_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/models/keras_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/models/FlowNet_S.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/models/FlowNet_S.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +52,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.FlowNet_S">
+  <component name="RunManager" selected="Python.FlowNet_S (1)">
+    <configuration name="FlowNet_S (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SpeedChallenge" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dev/models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dev/models/FlowNet_S.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="FlowNet_S" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SpeedChallenge" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,6 +119,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.FlowNet_S (1)" />
         <item itemvalue="Python.FlowNet_S" />
         <item itemvalue="Python.main" />
       </list>
@@ -128,7 +147,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
