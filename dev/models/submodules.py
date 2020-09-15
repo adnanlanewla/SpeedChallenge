@@ -34,7 +34,7 @@ here is therefore calculated using 'kernel_size-1-padding' since dilation is (1,
 def deconv(filters, kernel_size=4, padding=1, stride=2, bias=True, activation='LeakyReLU'):
     sequential_model = tf.keras.Sequential()
     sequential_model.add(tf.keras.layers.ZeroPadding2D(kernel_size-1-padding))
-    sequential_model.add(tf.keras.layers.Conv2DTranspose(filters=filters, kernel_size=kernel_size, stride=stride,
+    sequential_model.add(tf.keras.layers.Conv2DTranspose(filters=filters, kernel_size=kernel_size, strides=stride,
                                                          use_bias=bias, bias_initializer='RandomUniform'))
     if activation:
         sequential_model.add(tf.keras.layers.LeakyReLU(0.1))
@@ -46,6 +46,6 @@ def predict_flow():
     return tf.keras.Sequential(
         [
             tf.keras.layers.ZeroPadding2D(1),
-            tf.keras.layers.Conv2D(filters=2, kernel_size=3, stride=1, bias=True, bias_initializer='RandomUniform')
+            tf.keras.layers.Conv2D(filters=2, kernel_size=3, strides=1, use_bias=True, bias_initializer='RandomUniform')
         ]
     )

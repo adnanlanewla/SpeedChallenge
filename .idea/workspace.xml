@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="72699fd6-e0c7-4fe6-aa72-3a7a4f583953" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/models/FlowNet_S.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/models/FlowNet_S.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/models/submodules.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/models/submodules.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +31,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SpeedChallenge_Local/flownet1-pytorch-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -52,7 +52,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.FlowNet_S (1)">
+  <component name="RunManager" selected="Python.main">
     <configuration name="FlowNet_S (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SpeedChallenge" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -119,9 +119,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.FlowNet_S (1)" />
         <item itemvalue="Python.FlowNet_S" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
