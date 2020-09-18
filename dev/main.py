@@ -1,7 +1,8 @@
-from keras_models import *
+from models.keras_models import *
 from helper_functions import *
 from image_preprocessing import *
 import generator
+from SpeedChallenge.dev.models.FlowNet_S import *
 
 
 
@@ -26,5 +27,8 @@ if __name__ == '__main__':
     # this will generate the pipeline, we can use for training the keras model
     if generate_pipeline:
         my_training_batch_generator, my_validation_batch_generator = generator.My_Custom_Generator(image_directory)
+
+    model = FlowNet_S()
+    prediction = model.predict('')
 
     print('Done')

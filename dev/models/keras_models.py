@@ -15,11 +15,37 @@ def VGG_model(image_w, image_h, l1=0, l2=0):
     new_model.add(model)
     new_model.add(tf.keras.layers.Flatten(name='flatten'))
     new_model.add(tf.keras.layers.Dense(256, activation='softmax', name='new_fc1', kernel_regularizer=regularizer))
-    #new_model.add(tf.keras.layers.Dense(5, activation='softmax', name='new_predictions'))
+    new_model.add(tf.keras.layers.Dense(1, activation='linear', name='new_predictions'))
 
     # new_model.summary()
-    new_model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=["accuracy"])
+    new_model.compile(loss="mse", optimizer='adam', metrics=["accuracy"])
     print(new_model.summary())
     return new_model
 
+class VGG_model(tf.keras.Model):
 
+    def __init__(self, input_shape):
+        super().__init__()
+        self.input_shape = input_shape
+        self.VGG16 = tf.keras.applications.VGG16(weights="imagenet", include_top=False, input_shape=input_shape)
+
+        for layer in self.VGG16.layers[0:19]:
+            layer.trainable = False
+
+        self.regularizer = tf.keras.regularizers.l1()
+        self.sequential= tf.keras.models.Sequential()
+        self.flatten_layer = tf.keras.layers.Flatten(name='flatten')
+        self.dense1 = tf.keras.layers.Dense(256, activation='softmax', name='new_fc1', kernel_regularizer=self.regularizer)
+        self.dense2 = tf.keras.layers.Dense(1, activation='linear', name='new_predictions')
+
+
+    def call(self, inputs, training=None, mask=None):
+
+        VGG16_models = self.VGG16(inputs)
+        print(VGG16_models.summary())
+        model = self.sequential(VGG16_models)
+        model = self.flatten_layer(model)
+        model = self.dense1(model)
+        model = self.dense2(model)
+        print(model.summary())
+        return model
