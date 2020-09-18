@@ -33,5 +33,5 @@ class My_Custom_Generator(tf.keras.utils.Sequence):
         #TODO: we are dividing each image by 255.0, if we need to get a image of 3 channel,
         # then i am not sure if we need to do that
         return np.array([
-            cv2.resize(cv2.imread('../data/Images/' + str(file_name)), (80, 80, 3))
+            cv2.imread(str(file_name))
             for file_name in batch_x]) / 255.0, np.array(batch_y)

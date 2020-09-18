@@ -1,5 +1,5 @@
 import tensorflow as tf
-from dev.models.submodules import *
+from models.submodules import *
 
 class FlowNet_S(tf.keras.Model):
 

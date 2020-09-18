@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-def VGG_model(image_w, image_h, l1=0, l2=0):
+def VGG_model_function(image_w, image_h, l1=0, l2=0):
     model = tf.keras.applications.VGG16(weights="imagenet", include_top=False, input_shape=(image_w, image_h, 3))
     print(model.summary())
     for layer in model.layers[0:19]:
@@ -49,3 +49,16 @@ class VGG_model(tf.keras.Model):
         model = self.dense2(model)
         print(model.summary())
         return model
+
+def linear_reg_keras(input_shape):
+    model = tf.keras.Sequential([
+        tf.layers.Dense(64, activation='relu', input_shape=input_shape),
+        tf.layers.Dense(64, activation='relu'),
+        tf.layers.Dense(1)
+    ])
+    optimizer = tf.keras.optimizers.RMSprop(0.001)
+
+    model.compile(loss='mse',
+                  optimizer=optimizer,
+                  metrics=['mae', 'mse'])
+    return model
