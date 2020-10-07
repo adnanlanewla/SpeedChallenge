@@ -1,15 +1,13 @@
 from models.keras_models import *
 from helper_functions import *
 from image_preprocessing import *
-import models.FlowNet_S as FlowNet_S
+import models.FlowNet_S as flownet_s
 from optical_flow_pipeline import *
-
-# import dev.generator
+import generator
 
 
 if __name__ == '__main__':
-    # model = FlowNet_S.FlowNet_S()
-    model = FlowNet_S.FlowNet_S()
+    model = flownet_s.FlowNet_S()
     model.build(input_shape=(None, 384, 512, 6))
     model.load_weights('../data/Local_Data/FlowNetS_Checkpoints/flownet-S2')
     model.compile()
@@ -26,5 +24,5 @@ if __name__ == '__main__':
     # if generate_pipeline:
     #     my_training_batch_generator, my_validation_batch_generator = generator.My_Custom_Generator(image_directory)
     #
-    optical_flow_pipeline_with_VGG_16(image_directory)
+    # optical_flow_pipeline_with_VGG_16(image_directory)
     # print('Done')

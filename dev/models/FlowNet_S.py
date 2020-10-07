@@ -1,14 +1,14 @@
 import tensorflow as tf
 from models.submodules import *
-from dev.models.submodules import *
 import numpy as np
+
 
 class FlowNet_S(tf.keras.Model):
 
     def __init__(self, batchNorm=True):
         super().__init__()
         self.batchNorm = batchNorm
-        #Just the normal everyday good ol' 2D convolution layers
+        # Just the normal everyday good ol' 2D convolution layers
         self.conv1 = conv2D(self.batchNorm, filters=64, kernel_size=7, stride=2, name='conv1')
         self.conv2 = conv2D(self.batchNorm, filters=128, kernel_size=5, stride=2, name='conv2')
         self.conv3 = conv2D(self.batchNorm, filters=256, kernel_size=5, stride=2, name='conv3')
@@ -20,8 +20,8 @@ class FlowNet_S(tf.keras.Model):
         self.conv6 = conv2D(self.batchNorm, filters=1024, stride=2, name='conv6')
         self.conv6_1 = conv2D(self.batchNorm, filters=1024, name='conv6_1')
 
-        #These layers are 2D transposed convolutions. Its not exactly the reverse of a convolution, however, doing this
-        #type of convolution will increase the output feature space, i.e., increase the height and width of the
+        # These layers are 2D transposed convolutions. Its not exactly the reverse of a convolution, however, doing this
+        # type of convolution will increase the output feature space, i.e., increase the height and width of the
         # output w.r.t the input, which is the opposite of what a regular 2D convolution does.
         self.deconv5 = deconv(512, name='deconv5')
         self.deconv4 = deconv(256, name='deconv4')
@@ -36,18 +36,18 @@ class FlowNet_S(tf.keras.Model):
         self.predict_flow3 = predict_flow(name='predict_flow3')
         self.predict_flow2 = predict_flow(name='predict_flow2')
 
-        #These layers are the 2D transposed convolutions but with no activation applied to them. It respresents
-        #upscaling of the intermediate optical flow fields.
+        # These layers are the 2D transposed convolutions but with no activation applied to them. It respresents
+        # upscaling of the intermediate optical flow fields.
         self.upsampled_flow6_to_5 = deconv(2, bias=False, activation=False, name='upsampled_flow6_to_5')
         self.upsampled_flow5_to_4 = deconv(2, bias=False, activation=False, name='upsampled_flow5_to_4')
         self.upsampled_flow4_to_3 = deconv(2, bias=False, activation=False, name='upsampled_flow4_to_3')
         self.upsampled_flow3_to_2 = deconv(2, bias=False, activation=False, name='upsampled_flow3_to_2')
 
-        #Upsampling of the final optical flow field by a factor of 4. Layer below is not part of the model
+        # Upsampling of the final optical flow field by a factor of 4. Layer below is not part of the model
         # self.upsample1 = tf.keras.layers.UpSampling2D(size=(4,4))
 
     def call(self, inputs, training=None):
-        #Defining the forward pass
+        # Defining the forward pass
         out_conv1 = self.conv1(inputs)
         out_conv2 = self.conv2(out_conv1)
         out_conv3 = self.conv3_1(self.conv3(out_conv2))
@@ -86,6 +86,6 @@ class FlowNet_S(tf.keras.Model):
         flow2 = self.predict_flow2(concat2)
 
         if training:
-            return flow2,flow3,flow4,flow5,flow6
+            return flow2, flow3, flow4, flow5, flow6
         else:
             return flow2

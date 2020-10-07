@@ -4,6 +4,7 @@ from models.keras_models import *
 import os
 from models.FlowNet_S import *
 from generator import *
+import helper_functions
 
 
 def optical_flow_pipeline_with_VGG_16(image_directory):
