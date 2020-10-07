@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72699fd6-e0c7-4fe6-aa72-3a7a4f583953" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/Local_Data/FlowNetS_Checkpoints/checkpoint" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Local_Data/FlowNetS_Checkpoints/flownet-S2.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/Local_Data/FlowNetS_Checkpoints/flownet-S2.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/output_dimension_calculation.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/models/FlowNet_S.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/models/FlowNet_S.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/models/submodules.py" beforeDir="false" afterPath="$PROJECT_DIR$/dev/models/submodules.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -95,6 +100,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="image_preprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SpeedChallenge" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dev" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dev/image_preprocessing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SpeedChallenge" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -120,6 +146,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.image_preprocessing" />
         <item itemvalue="Python.FlowNet_S (1)" />
         <item itemvalue="Python.FlowNet_S" />
       </list>

@@ -9,6 +9,11 @@ from optical_flow_pipeline import *
 
 if __name__ == '__main__':
     # model = FlowNet_S.FlowNet_S()
+    model = FlowNet_S.FlowNet_S()
+    model.build(input_shape=(None, 384, 512, 6))
+    model.load_weights('../data/Local_Data/FlowNetS_Checkpoints/flownet-S2')
+    model.compile()
+    model.summary()
 
     # extract_frames = False
     # generate_pipeline = True

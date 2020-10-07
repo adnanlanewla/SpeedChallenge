@@ -9,3 +9,6 @@
 .idea/SpeedChallenge.iml
 .idea/SpeedChallenge.iml
 .idea/workspace.xml
+data/Local_Data/FlowNetS_Checkpoints/checkpoint
+*.data-00000-of-00001
+data/Local_Data/FlowNetS_Checkpoints/flownet-S2.index
