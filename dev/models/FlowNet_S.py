@@ -5,7 +5,7 @@ import numpy as np
 
 class FlowNet_S(tf.keras.Model):
 
-    def __init__(self, batchNorm=True):
+    def __init__(self, batchNorm=False):
         super().__init__()
         self.batchNorm = batchNorm
         # Just the normal everyday good ol' 2D convolution layers
