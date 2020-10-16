@@ -9,14 +9,21 @@ import helper_functions
 
 def optical_flow_pipeline_with_VGG_16(image_directory):
     flownet_model = FlowNet_S()
+    flownet_model.build(input_shape=(None,480,640,6))
+    flownet_model.load_weights('../data/')
     filenames, labels = helper_functions.get_filenames_labels(image_directory)
 
-    for i in range(len(filenames)):
-        file = filenames[i]
+    for i in range(len(filenames)-1):
+        file1 = filenames[i]
+        file2 = filename[i+1]
         label = labels[i]
-        image_array = cv2.imread(file)
-        prediction_flownet = flownet_model.predict(image_array)
-        path, filename = os.path.split(file)
+        image_array1 = cv2.imread(file1)
+        image_array2 = cv2.imread(file2)
+        image = np.concatenate([image_array1, image_array2], axis=-1)
+        image = np.reshape(image, (1, 480,640,6))
+        image = image.astype('float32')
+        prediction_flownet = flownet_model.predict(image)
+        path, filename = os.path.split(file1)
         path = os.path.join(path,"flownet_predicted")
         if not os.path.exists(path):
             os.makedirs(path)
