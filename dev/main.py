@@ -8,15 +8,17 @@ import generator
 
 if __name__ == '__main__':
     image1 = cv2.imread(
-        'C:/Users/hlane/Documents/Machine Learning/SpeedChallenge/SpeedChallenge_Local/flownet1-pytorch-master/images/flow/3d/image1.png')
+        'C:/Users/hlane/Documents/Machine Learning/SpeedChallenge/SpeedChallenge_Shared/data/Local_Data/Images/frame_0_0_1_28.105569.jpg')
     image2 = cv2.imread(
-        'C:/Users/hlane/Documents/Machine Learning/SpeedChallenge/SpeedChallenge_Local/flownet1-pytorch-master/images/flow/3d/image2.png')
+        'C:/Users/hlane/Documents/Machine Learning/SpeedChallenge/SpeedChallenge_Shared/data/Local_Data/Images/frame_0_0_2_28.105569.jpg')
     image = np.concatenate([image1, image2], axis=-1)
-    image = np.reshape(image, (1, 384, 512, 6))
+    a = image.shape
+    print(a)
+    image = np.reshape(image, (1, 480, 640, 6))
     image = image.astype('float32')
 
     model = flownet_s.FlowNet_S()
-    model.build(input_shape=(None, 384, 512, 6))
+    model.build(input_shape=(None, 480, 640, 6))
     model.load_weights('../data/Local_Data/FlowNetS_Checkpoints/flownet-S2')
     model.compile()
     model.summary()
