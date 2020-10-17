@@ -37,6 +37,11 @@ def flow2rgb(flow_map, max_value):
     rgb_map[2] += normalized_flow_map[1]
     return rgb_map.clip(0,1)
 
+#The whole transformation in Pytorch code boils down to the following function (for inference only)
+def apply_transform(image):
+    image = image/255
+    image = image - [0.411,0.432,0.45]
+    return image
 
 if __name__ == '__main__':
     None
