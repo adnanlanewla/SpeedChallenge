@@ -29,7 +29,6 @@ class My_Custom_Generator(tf.keras.utils.Sequence):
         batch_x = self.image_filenames[idx * self.batch_size: (idx + 1) * self.batch_size]
         batch_y = self.labels[idx * self.batch_size: (idx + 1) * self.batch_size]
 
-        #TODO: the resize shape needs to be discussed with hasnain, we prpbably don't even need to reshape
         #TODO: we are dividing each image by 255.0, if we need to get a image of 3 channel,
         # then i am not sure if we need to do that
         return np.array([

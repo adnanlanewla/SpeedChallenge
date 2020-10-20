@@ -1,6 +1,7 @@
 import cv2
 import os
 import numpy as np
+import glob
 
 
 def frame_extractor():
@@ -65,3 +66,17 @@ def speed_difference():
     data = np.loadtxt(path)
     data = np.diff(data)
     np.savetxt('../data/Speed_Differences.txt', data, fmt='%f')
+
+def video_writer(image_directory, video_filename):
+    img_array = []
+    for filename in glob.glob(image_directory + '*.jpg'):
+        img = cv2.imread(filename)
+        height, width, layers = img.shape
+        size = (width, height)
+        img_array.append(img)
+
+    out = cv2.VideoWriter(video_filename, cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
+
+    for i in range(len(img_array)):
+        out.write(img_array[i])
+    out.release()
