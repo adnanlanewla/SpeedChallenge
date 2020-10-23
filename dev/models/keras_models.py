@@ -1,7 +1,7 @@
 import tensorflow as tf
 
-def VGG_model_function(image_w, image_h, l1=0, l2=0):
-    model = tf.keras.applications.VGG16(weights="imagenet", include_top=False, input_shape=(image_w, image_h, 3))
+def VGG_model_function(input_shape=(120,160,3), l1=0, l2=0):
+    model = tf.keras.applications.VGG16(weights="imagenet", include_top=False, input_shape=input_shape)
     print(model.summary())
     for layer in model.layers[0:19]:
         layer.trainable = False
@@ -26,7 +26,7 @@ class VGG_model(tf.keras.Model):
 
     def __init__(self, input_shape):
         super().__init__()
-        self.input_shape = input_shape
+        #self.input_shape = input_shape
         self.VGG16 = tf.keras.applications.VGG16(weights="imagenet", include_top=False, input_shape=input_shape)
 
         for layer in self.VGG16.layers[0:19]:
@@ -40,14 +40,12 @@ class VGG_model(tf.keras.Model):
 
 
     def call(self, inputs, training=None, mask=None):
-
+        # defining forward pass
         VGG16_models = self.VGG16(inputs)
-        print(VGG16_models.summary())
         model = self.sequential(VGG16_models)
         model = self.flatten_layer(model)
         model = self.dense1(model)
         model = self.dense2(model)
-        print(model.summary())
         return model
 
 def linear_reg_keras(input_shape):

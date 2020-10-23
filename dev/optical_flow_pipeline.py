@@ -33,10 +33,12 @@ def build_flowNetmodel(input_shape=(None,480,640,6)):
     flownet_model.summary()
     return flownet_model
 
-def optical_flow_pipeline_with_VGG_16(image_directory):
-    flownet_model = build_flowNetmodel(input_shape=(1,480,640,6))
+def optical_flow_pipeline(image_directory):
     filenames, accelerations,new_opti_flow_filenames =\
         helper_functions.fileIO_for_opti_flow(image_directory)
+    height, width, channels = cv2.imread(os.path.join(image_directory,filenames[0])).shape
+    flownet_model = build_flowNetmodel(input_shape=(1,height,width,6))
+
 
     for i in range(len(filenames)-1):
         file1 = os.path.join(image_directory,filenames[i])
@@ -55,6 +57,16 @@ def optical_flow_pipeline_with_VGG_16(image_directory):
     # vgg_model = VGG_model((480,640,3))
     # vgg_model.compile(loss="mse", optimizer='adam', metrics=["mse", 'mae'])
     # vgg_model.fit_generator(my_training_batch_generator,validation_data=my_validation_batch_generator)
+
+def VGG16_pipeline(image_directory, batch_size=32, normalize_y=False):
+    my_training_batch_generator, my_validation_batch_generator = generator_pipeline(image_directory, batch_size, normalize_y)
+    height, width, channels = cv2.imread(my_training_batch_generator.image_filenames[0]).shape
+    input_shape = (height, width, channels)
+    vgg_16_model = VGG_model_function(input_shape=input_shape)
+    vgg_16_model.fit_generator(my_training_batch_generator,validation_data=my_validation_batch_generator, epochs=2, use_multiprocessing=True, workers=0)
+    print(vgg_16_model.reset_metrics())
+
+
 
 def optical_flow_pipeline_with_linear_regression(image_directory):
     flownet_model = FlowNet_S()

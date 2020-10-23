@@ -2,20 +2,22 @@ import os
 import numpy as np
 
 def get_filenames_labels(image_directory):
-    filenames = []
+    filenames = os.listdir(image_directory)
+    filenames.sort(key=lambda x: os.path.getmtime(os.path.join(image_directory, x)))
     labels = []
-    for file in os.listdir(image_directory):
-        if(file.endswith('.jpg')):
+    sorted_filenames = []
+    for file in filenames:
+        if(file.endswith('.jpg') or file.endswith('.png')):
             image_file_name = os.path.splitext(file)[0]
             split_filename = image_file_name.split('_')
-            speed = split_filename[len(split_filename)-1]
-            filenames.append(os.path.join(image_directory,file))
-            labels.append(speed)
+            label = split_filename[len(split_filename)-1]
+            sorted_filenames.append(os.path.join(image_directory,file))
+            labels.append(label)
 
-    print(len(filenames))
+    print(len(sorted_filenames))
     print(len(labels))
 
-    return filenames, labels
+    return sorted_filenames, labels
 
 def fileIO_for_opti_flow(image_directory):
     filenames = os.listdir(image_directory)

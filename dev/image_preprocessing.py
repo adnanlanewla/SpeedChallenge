@@ -4,10 +4,11 @@ import numpy as np
 import glob
 
 
-def frame_extractor():
+def frame_extractor(video_filename='../data/train.mp4',dest_folder='../data/Images/train'):
     #Create Image Folder
-    os.mkdir('../data/Local_Data/Images')
-    filename = '../data/train.mp4'
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
+    filename = video_filename
     #Get video object
     captured_video = cv2.VideoCapture(filename)
     # get the first frame from the video file. Each time the command below
@@ -69,8 +70,10 @@ def speed_difference():
 
 def video_writer(image_directory, video_filename):
     img_array = []
-    for filename in glob.glob(image_directory + '*.jpg'):
-        img = cv2.imread(filename)
+    filenames = os.listdir(image_directory)
+    filenames.sort(key=lambda x: os.path.getmtime(os.path.join(image_directory, x)))
+    for filename in filenames:
+        img = cv2.imread(os.path.join(image_directory,filename))
         height, width, layers = img.shape
         size = (width, height)
         img_array.append(img)
