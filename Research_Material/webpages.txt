@@ -27,3 +27,6 @@ https://github.com/ClementPinard/FlowNetPytorch
 
 10) Keras Implementation of ConvLSTM (Convolution network with RNN)
 https://medium.com/neuronio/an-introduction-to-convlstm-55c9025563a7
+
+11) Keras Implementation of ConvLSTM2D (best article so far which explains how to do video processing using convLSTM2D)
+https://thebinarynotes.com/video-classification-keras-convlstm/
