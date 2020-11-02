@@ -2,7 +2,7 @@ from models.keras_models import *
 from helper_functions import *
 from image_preprocessing import *
 import models.FlowNet_S as flownet_s
-from optical_flow_pipeline import *
+from pipeline import *
 from helper_functions import  *
 from imageio import imread, imwrite
 import generator
@@ -13,7 +13,8 @@ if __name__ == '__main__':
 
     # extract_frames = False
     optical_flow = False
-    VGG_16 = True
+    VGG_16 = False
+    ConvLSTM = True
     # generate_pipeline = True
     image_directory = "..\data\Images"
     image_dir_train = '../data/Images/train'
@@ -29,8 +30,10 @@ if __name__ == '__main__':
     if optical_flow:
         optical_flow_pipeline(image_directory)
         #video_writer('../data/predicted_images', '../data/video_from_optiflow.avi')
-        VGG16_pipeline('../data/predicted_images', batch_size=128)
+        #VGG16_pipeline('../data/predicted_images', batch_size=128)
     if VGG_16:
         VGG16_pipeline(image_directory, batch_size=32, normalize_y=True)
+    if ConvLSTM:
+        ConvLSTM_pipeline(image_directory, batch_size=16)
 
     print('Done')

@@ -50,3 +50,26 @@ class My_Custom_Generator(tf.keras.utils.Sequence):
         return np.array([
             cv2.imread(file_name)
             for file_name in batch_x]) / 255.0, np.array(batch_y)
+
+
+class my_convLSTM_generator(tf.keras.utils.Sequence):
+
+    def __init__(self, image_filenames, labels, batch_size):
+        self.image_filenames = image_filenames
+        self.labels = labels
+        self.batch_size = batch_size
+
+    def __len__(self):
+        return (np.ceil(len(self.image_filenames) / float(self.batch_size))).astype(np.int)
+
+    # This methods gets the size of the batch for X and Y
+    def __getitem__(self, idx):
+        batch_x = self.image_filenames[idx * self.batch_size: (idx + 1) * self.batch_size]
+        batch_y = self.labels[idx * self.batch_size: (idx + 1) * self.batch_size]
+
+
+        #TODO: we are dividing each image by 255.0, if we need to get a image of 3 channel,
+        # then i am not sure if we need to do that
+        return np.array([
+            cv2.imread(file_name)
+            for file_name in batch_x]) / 255.0, np.array(batch_y)

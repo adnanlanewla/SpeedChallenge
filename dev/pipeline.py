@@ -5,6 +5,7 @@ import os
 from models.FlowNet_S import *
 from generator import *
 import helper_functions
+import datapreprocesor
 from imageio import imread, imwrite
 
 def get_image(filename):
@@ -65,6 +66,14 @@ def VGG16_pipeline(image_directory, batch_size=32, normalize_y=False):
     vgg_16_model = VGG_model_function(input_shape=input_shape)
     vgg_16_model.fit_generator(my_training_batch_generator,validation_data=my_validation_batch_generator, epochs=2, use_multiprocessing=True, workers=0)
     print(vgg_16_model.reset_metrics())
+
+def ConvLSTM_pipeline(image_directory, batch_size=32):
+    filenames, labels = helper_functions.get_filenames_labels(image_directory)
+    X, Y = datapreprocesor.process_data_for_convLSTM(filenames,labels)
+    X_train_filenames, X_val_filenames, y_train, y_val = train_test_split(
+        X, Y, test_size=0.2, random_state=1, shuffle=False)
+    my_training_batch_generator = My_Custom_Generator(X_train_filenames, y_train, batch_size)
+    my_validation_batch_generator = My_Custom_Generator(X_val_filenames, y_val, batch_size)
 
 
 

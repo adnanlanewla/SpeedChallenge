@@ -1,5 +1,5 @@
 import models.FlowNet_S as flownet_s
-from optical_flow_pipeline import *
+from pipeline import *
 from helper_functions import  *
 from imageio import imread, imwrite
 
