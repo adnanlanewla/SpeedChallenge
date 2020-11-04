@@ -7,33 +7,36 @@ from helper_functions import  *
 from imageio import imread, imwrite
 import generator
 
-#The flow output pattern matches the Pytorch output exactly. The background color of the output will depend on
-#which image is the first in image concantenation.
+
 if __name__ == '__main__':
 
-    # extract_frames = False
+    extract_frames = False
     optical_flow = False
     VGG_16 = False
     ConvLSTM = True
-    # generate_pipeline = True
     image_directory = "..\data\Images"
     image_dir_train = '../data/Images/train'
     image_dir_test = '../data/Images/test'
-    # if extract_frames:
-    #     # renaming of files is done during extraction of frames
-    #     frame_extractor()
-    #
-    # # this will generate the pipeline, we can use for training the keras model
-    # if generate_pipeline:
-    #     my_training_batch_generator, my_validation_batch_generator = generator.My_Custom_Generator(image_directory)
-    #
+    if extract_frames:
+        # renaming of files is done during extraction of frames
+        frame_extractor()
+        print("Frame extraction from Video finished")
     if optical_flow:
+        # Optical flow pipeline
+        # 1) Create the optical flow images by passing in the image directory
         optical_flow_pipeline(image_directory)
-        #video_writer('../data/predicted_images', '../data/video_from_optiflow.avi')
-        #VGG16_pipeline('../data/predicted_images', batch_size=128)
+        # 2) Create a video from the optical flow output images
+        videocreator('../data/predicted_images', '../data/video_from_optiflow.avi')
+        # 3) Use the images from the Optical flow output to pass it to VGG 16 network to predict acceleration and to extract features
+        VGG16_pipeline('../data/predicted_images', batch_size=128)
+        print("Optical flow pipeline finished")
     if VGG_16:
+        # VGG 16 pipeline.
         VGG16_pipeline(image_directory, batch_size=32, normalize_y=True)
+        print("VGG_16 pipeline finished")
     if ConvLSTM:
-        ConvLSTM_pipeline(image_directory, batch_size=16)
+        # ConvLSTM pipeline
+        ConvLSTM_pipeline(image_directory, batch_size=4, time_steps=20)
+        print("ConvLSTM pipeline finished")
 
     print('Done')

@@ -1,6 +1,32 @@
 import tensorflow as tf
 
+def Conv_LSTM_function(input_shape=(60,480,640,3), filters=64, dense_units=256):
+    '''
+    Creates a ConvLSTM model.
+    :param input_shape: Input shape should be (seq_len, img_height, img_width, 3). THe batch size should not be part of input_shape
+    :return:
+    '''
+    model = tf.keras.Sequential()
+    # Creates a ConVLSTM2D layer
+    model.add(tf.keras.layers.ConvLSTM2D(filters=filters, kernel_size=(3, 3), return_sequences=True, data_format="channels_last",
+                         input_shape=input_shape))
+    model.add(tf.keras.layers.Dropout(0.2))
+    model.add(tf.keras.layers.Flatten())
+    model.add(tf.keras.layers.Dense(dense_units, activation="relu"))
+    model.add(tf.keras.layers.Dropout(0.3))
+    model.add(tf.keras.layers.Dense(1, activation="softmax"))
+    print(model.summary())
+    model.compile(loss='mse',optimizer='adam', metrics=["accuracy"])
+    return model
+
 def VGG_model_function(input_shape=(120,160,3), l1=0, l2=0):
+    '''
+    Creates a VGG 16 model with one dense unit at the end. Only the top dense layer is trainable. All the convolution layers are not trainable
+    :param input_shape:
+    :param l1:
+    :param l2:
+    :return:
+    '''
     model = tf.keras.applications.VGG16(weights="imagenet", include_top=False, input_shape=input_shape)
     print(model.summary())
     for layer in model.layers[0:19]:
@@ -22,6 +48,7 @@ def VGG_model_function(input_shape=(120,160,3), l1=0, l2=0):
     print(new_model.summary())
     return new_model
 
+# VGG 16 model class
 class VGG_model(tf.keras.Model):
 
     def __init__(self, input_shape):
@@ -48,15 +75,3 @@ class VGG_model(tf.keras.Model):
         model = self.dense2(model)
         return model
 
-def linear_reg_keras(input_shape):
-    model = tf.keras.Sequential([
-        tf.layers.Dense(64, activation='relu', input_shape=input_shape),
-        tf.layers.Dense(64, activation='relu'),
-        tf.layers.Dense(1)
-    ])
-    optimizer = tf.keras.optimizers.RMSprop(0.001)
-
-    model.compile(loss='mse',
-                  optimizer=optimizer,
-                  metrics=['mae', 'mse'])
-    return model

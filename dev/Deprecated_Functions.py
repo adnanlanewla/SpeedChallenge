@@ -81,6 +81,7 @@ def save_images_as_np_array(image_directory, array_filename):
     array_of_images = np.array(all_images, dtype=np.uint8)
     np.savez(array_filename, array_of_images)
 
+# load numpy array from a file
 def load_numpy_array(array_filename):
     container = np.load(array_filename)
     data = [container[key] for key in container]

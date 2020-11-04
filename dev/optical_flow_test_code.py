@@ -3,7 +3,8 @@ from pipeline import *
 from helper_functions import  *
 from imageio import imread, imwrite
 
-
+#The flow output pattern matches the Pytorch output exactly. The background color of the output will depend on
+#which image is the first in image concantenation.
 
 image1 = cv2.imread(
     'C:/Users/hlane/Documents/Machine Learning/SpeedChallenge/SpeedChallenge_Local/flownet1-pytorch-master/images/flow/3d/image1.png')

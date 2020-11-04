@@ -2,15 +2,24 @@ import os
 import numpy as np
 
 def get_filenames_labels(image_directory):
+    '''
+    This method get the filename and the labels associate with that filename give the image directory
+    :param image_directory:
+    :return:
+    '''
     filenames = os.listdir(image_directory)
+    # This line sorts the file by time
     filenames.sort(key=lambda x: os.path.getmtime(os.path.join(image_directory, x)))
     labels = []
     sorted_filenames = []
     for file in filenames:
         if(file.endswith('.jpg') or file.endswith('.png')):
+            # find the label associated with the filename
             image_file_name = os.path.splitext(file)[0]
             split_filename = image_file_name.split('_')
+            # Get the label
             label = split_filename[len(split_filename)-1]
+            # append the label and the filename in the list
             sorted_filenames.append(os.path.join(image_directory,file))
             labels.append(label)
 
