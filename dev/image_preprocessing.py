@@ -12,7 +12,7 @@ def makedirectory(directory):
     except FileExistsError:
         pass
 
-def frame_extractor(save_directory_name, video_file, fps, frame_naming=None):
+def frame_extractor(save_directory_name, video_file, fps, rescale=None, rescale_factor = 0.25, frame_naming=None):
     '''
     Extracts images from a given video
 
@@ -20,6 +20,8 @@ def frame_extractor(save_directory_name, video_file, fps, frame_naming=None):
     save_directory_name -- directory name in Local_Data where the image files will be saved
     video_file -- video file that is to be parsed. File must be located in the data folder.
     fps -- frames per second of the video
+    rescale -- rescale discrete
+    rescale_factor -- rescaling factor. Default is 0.25
     frame_naming -- Text file to be used for naming of saved files (optional). File must be located in the data folder.
     '''
 
@@ -56,6 +58,9 @@ def frame_extractor(save_directory_name, video_file, fps, frame_naming=None):
             # name of each image
             image_name = f'{directory}/frame_{minute}_{second % 60}_{frame_number_within_one_second}.jpg'
         # save the image at 100% quality
+        if rescale:
+            image = image_resize(image=image, scaling_factor=rescale_factor)
+
         cv2.imwrite(image_name, image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
         # Keep running the command below until there are no more frames left
         # which will be indicated by the 'success' boolean
@@ -155,6 +160,9 @@ def videocreator(img_directory_name, saved_video_name, fps=10):
 
     cv2.destroyAllWindows()
     video.release()
+
+def image_resize(image, scaling_factor=0.5):
+    return (cv2.resize(image, (0,0), fx=scaling_factor, fy=scaling_factor))
 
 if __name__ == '__main__':
     pass
