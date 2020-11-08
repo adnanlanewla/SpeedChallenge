@@ -1,6 +1,4 @@
-import tensorflow as tf
 from models.submodules import *
-import numpy as np
 
 
 class FlowNet_S(tf.keras.Model):
@@ -43,8 +41,6 @@ class FlowNet_S(tf.keras.Model):
         self.upsampled_flow4_to_3 = deconv(2, bias=False, activation=False, name='upsampled_flow4_to_3')
         self.upsampled_flow3_to_2 = deconv(2, bias=False, activation=False, name='upsampled_flow3_to_2')
 
-        # Upsampling of the final optical flow field by a factor of 4. Layer below is not part of the model
-        # self.upsample1 = tf.keras.layers.UpSampling2D(size=(4,4))
 
     def call(self, inputs, training=None):
         # Defining the forward pass
@@ -56,29 +52,21 @@ class FlowNet_S(tf.keras.Model):
         out_conv6 = self.conv6_1(self.conv6(out_conv5))
 
         flow6 = self.predict_flow6(out_conv6)
-        # flow6_up = self.upsampled_flow6_to_5(flow6)
-        # out_deconv5 = self.deconv5(out_conv6)
         flow6_up = crop_like(antipad(self.upsampled_flow6_to_5(flow6)), out_conv5)
         out_deconv5 = crop_like(antipad(self.deconv5(out_conv6)), out_conv5)
 
         concat5 = tf.keras.layers.concatenate([out_conv5, out_deconv5, flow6_up], axis=-1)
         flow5 = self.predict_flow5(concat5)
-        # flow5_up = self.upsampled_flow5_to_4(flow5)
-        # out_deconv4 = self.deconv4(concat5)
         flow5_up = crop_like(antipad(self.upsampled_flow5_to_4(flow5)), out_conv4)
         out_deconv4 = crop_like(antipad(self.deconv4(concat5)), out_conv4)
 
         concat4 = tf.keras.layers.concatenate([out_conv4, out_deconv4, flow5_up], axis=-1)
         flow4 = self.predict_flow4(concat4)
-        # flow4_up = self.upsampled_flow4_to_3(flow4)
-        # out_deconv3 = self.deconv3(concat4)
         flow4_up = crop_like(antipad(self.upsampled_flow4_to_3(flow4)), out_conv3)
         out_deconv3 = crop_like(antipad(self.deconv3(concat4)), out_conv3)
 
         concat3 = tf.keras.layers.concatenate([out_conv3, out_deconv3, flow4_up], axis=-1)
         flow3 = self.predict_flow3(concat3)
-        # flow3_up = self.upsampled_flow3_to_2(flow3)
-        # out_deconv2 = self.deconv2(concat3)
         flow3_up = crop_like(antipad(self.upsampled_flow3_to_2(flow3)), out_conv2)
         out_deconv2 = crop_like(antipad(self.deconv2(concat3)), out_conv2)
 

@@ -41,7 +41,7 @@ def frame_extractor(save_directory_name, video_file,
     makedirectory(save_directory_name)
 
     #Get full video path + filename from the video file name
-    filename = os.path.join(video_file)
+    filename = os.path.abspath(video_file)
     #Get video object
     captured_video = cv2.VideoCapture(filename)
     # Get frames per second of the video
