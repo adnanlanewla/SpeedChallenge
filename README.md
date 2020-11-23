@@ -19,13 +19,13 @@ Description by [comma.ai](comma.ai)
 # Data Processing
 The original video data was converted in to images files using cv2. Each image file was named by following this nomenclature directory_frame_minute_second_frame_number_within_one_second_speed.jpg
 
-The method used for extracting images also has an option if the user wants to reduce the size of the original images by settings the rescale_factor
+The method used for extracting images also has an option if the user wants to reduce the size of the original images by setting the rescale_factor
 
 # Model Exploration
 Three methods were used to train and evaluate our data.
 
 1) [Flownet 1.0](https://arxiv.org/abs/1504.06852) - 
-we used existing implementation of Flownet1.0 in pytorch and converted that in to keras. Here's the implementation of Flownet 1.0 in pytorch and the corresponding weights https://github.com/sampepose/flownet2-tf
+we used existing implementation of Flownet1.0 in pytorch and converted that in to keras. Below is the link for the implementation of Flownet 1.0 in pytorch and the corresponding weights https://github.com/sampepose/flownet2-tf
 
 2) VGG 16 - 
 VGG-16 Convolution neural netowrk was used to process individual images with its label.
