@@ -1,3 +1,5 @@
+from numpy import format_parser
+
 from models.keras_models import *
 from helper_functions import *
 from image_preprocessing import *
@@ -19,7 +21,8 @@ if __name__ == '__main__':
     image_dir_test = '../data/Images/test'
     if extract_frames:
         # renaming of files is done during extraction of frames
-        frame_extractor()
+        frame_extractor(save_directory_name='../data/Local_Data/train/', video_file='../data/train.mp4',
+                        frame_naming='../data/train.txt', rescale=True,rescale_factor=0.25)
         print("Frame extraction from Video finished")
     if optical_flow:
         # Optical flow pipeline
@@ -36,7 +39,7 @@ if __name__ == '__main__':
         print("VGG_16 pipeline finished")
     if ConvLSTM:
         # ConvLSTM pipeline
-        ConvLSTM_pipeline(image_directory, batch_size=4, time_steps=20)
+        ConvLSTM_pipeline('../data/Local_Data/train/', batch_size=4, time_steps=60)
         print("ConvLSTM pipeline finished")
 
     print('Done')

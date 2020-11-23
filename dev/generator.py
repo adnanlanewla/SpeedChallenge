@@ -78,7 +78,7 @@ class my_convLSTM_generator(tf.keras.utils.Sequence):
 
 
     def __len__(self):
-        return self.batch_size
+        return (np.ceil(len(self.image_filenames) / float(self.batch_size))).astype(np.int)
 
     # This methods gets the size of the batch for X and Y
     def __getitem__(self, idx):

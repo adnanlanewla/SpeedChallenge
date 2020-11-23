@@ -125,11 +125,12 @@ def ConvLSTM_pipeline(image_directory, batch_size=32, time_steps=60):
                    my_training_batch_generator.height, my_training_batch_generator.width, my_training_batch_generator.channels)
     # Create a ConvLSTM model. The default filter value is 64 and the default value for dense unit is 256.
     # I have changed these values to not have too many trainable parameteres
-    model = Conv_LSTM_function(input_shape=input_shape, dense_units=8, filters=16)
+    # model = Conv_LSTM_function(input_shape=input_shape, dense_units=16, filters=16, output_units=time_steps)
+    model = Conv_LSTM_function_simplified(input_shape=input_shape, output_units=time_steps)
     # define a early stopping mechanism incase the accuracy doesn't improve in few epochs
-    earlystop = tf.keras.callbacks.EarlyStopping(patience=7)
+    earlystop = tf.keras.callbacks.EarlyStopping(patience=3)
     callbacks = [earlystop]
     # Calling the fit method
-    model.fit_generator(my_training_batch_generator,epochs=2,validation_data=my_validation_batch_generator, callbacks=callbacks,shuffle=False)
+    model.fit_generator(my_training_batch_generator,epochs=10,validation_data=my_validation_batch_generator, callbacks=callbacks)
     print(model.metrics)
 
