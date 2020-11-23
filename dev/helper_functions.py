@@ -38,7 +38,7 @@ def fileIO_for_opti_flow(image_directory):
     for i in range(len(filenames) - 1):
         file1 = filenames[i]
         file2 = filenames[i + 1]
-        if (file1.endswith('.jpg') and file1.endswith('.jpg')):
+        if (file1.endswith('.jpg') and file2.endswith('.jpg')):
             image_file_name1 = os.path.splitext(file1)[0]
             split_filename1 = image_file_name1.split('_')
 

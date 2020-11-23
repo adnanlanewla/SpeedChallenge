@@ -15,3 +15,5 @@ data/Local_Data/FlowNetS_Checkpoints/checkpoint
 data/Local_Data/FlowNetS_Checkpoints/flownet-S2.index
 *.avi
 *.mp4
+*.npy
+*.npy

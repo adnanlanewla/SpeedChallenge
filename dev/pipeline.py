@@ -14,21 +14,20 @@ def get_image(filename):
     :param filename:
     :return:
     '''
-    image1 = cv2.imread(
-        filename)
-    image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
+    image1 = imread(filename)
     image1 = helper_functions.apply_transform(image1)
     return image1
 
 def combine_images_for_opti_flow(image1, image2):
     '''
-    This method combines the two images for optiflow
+    This method combines the two images for opticalflow
     :param image1:
     :param image2:
     :return:
     '''
     image = np.concatenate([image1, image2], axis=-1) #for yellow output background
-    image = np.reshape(image, (1, 480,640,6))
+    h, w, c = image.shape
+    image = np.reshape(image, (1, h, w, c))
     image = image.astype('float32')
     return image
 

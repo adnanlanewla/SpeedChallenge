@@ -164,3 +164,17 @@ def image_resize(image, scaling_factor=0.5):
 
 if __name__ == '__main__':
     pass
+
+    # filenames = get_sorted_filenames_list('../data/Local_Data/predictions')
+    # image = cv2.imread(f'../data/Local_Data/predictions/{filenames[0]}')
+    # image = image.flatten()
+    # column_shape = image.shape[0]
+    # training_set = np.zeros((len(filenames), column_shape))
+    # for i in range(len(filenames)):
+    #     image = cv2.imread(f'../data/Local_Data/predictions/{filenames[i]}')
+    #     image = image.flatten()
+    #     training_set[i,:] = image
+    #
+    # np.save(f'../data/training_set', training_set)
+    # a = np.load(f'../data/training_set.npy')
+    # print(a.shape)
