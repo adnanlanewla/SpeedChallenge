@@ -114,7 +114,7 @@ def ConvLSTM_pipeline(image_directory, batch_size=32, time_steps=60):
     # split in to Train and Test set.
     # TODO: shuffle option is set to false. We should also try when then option is set to True
     X_train_filenames, X_val_filenames, y_train, y_val = train_test_split(
-        X, Y, test_size=0.2, random_state=1, shuffle=False)
+        X, Y, test_size=0.2, random_state=1, shuffle=True)
 
     # Custom training and validation generator for ConvLSTM model
     my_training_batch_generator = my_convLSTM_generator(X_train_filenames, y_train, batch_size)
